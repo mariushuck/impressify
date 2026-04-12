@@ -36,3 +36,16 @@ You are an expert Full-Stack TypeScript Developer building "Impressify", a Micro
 - Keep the scraping logic contained within `lib/scanner`.
 - Ensure robust selectors and handle timeouts gracefully to prevent serverless function crashes.
 - Never write tests here; Playwright is used purely as an automation/scraping engine.
+
+## 6. Git & Commit Conventions
+
+- Use **Conventional Commits** for all commit messages.
+- Format: `<type>(<scope>): <description>`
+- Types:
+  - `feat`: A new feature for the user.
+  - `fix`: A bug fix.
+  - `docs`: Documentation only changes.
+  - `style`: Changes that do not affect the meaning of the code (white-space, formatting, etc).
+  - `refactor`: A code change that neither fixes a bug nor adds a feature.
+  - `chore`: Updating build tasks, package manager configs, etc. (e.g., `chore(init): finished Setup`).
+- Keep the description short, imperative, and lowercase.
