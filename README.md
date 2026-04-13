@@ -1,99 +1,80 @@
 # Impressify
 
-Impressify is a micro-SaaS project for automated website compliance checks focused on GDPR and legal requirements (for example missing imprint/impressum pages, third-party integrations, and risky frontend patterns).
+Impressify is a micro-SaaS for automated website compliance checks. The product is designed to help identify GDPR and legal issues such as missing impressum/imprint pages, risky third-party integrations, and privacy-unfriendly frontend patterns.
 
-## Tech Stack
+## Stack
 
-- Next.js (App Router) + React + TypeScript (strict mode)
+- Next.js 16 App Router with React 19 and TypeScript strict mode
 - Tailwind CSS v4
-- Supabase (`@supabase/ssr`) for auth and database integration
-- Playwright for headless scanning automation
+- Supabase with `@supabase/ssr`
+- Playwright for headless website scanning
+- ESLint with `@stylistic/eslint-plugin`
 
-## Current Project Status
+## Status
 
-The repository is currently in a foundation stage:
-
-- Next.js app scaffold is in place
-- Supabase server/client helpers are implemented
-- Middleware for session refresh is present
-- Scanner module folder exists but scanning logic is not implemented yet
-
-## Prerequisites
-
-- Node.js 20+
-- npm 10+
-- A Supabase project (URL + anon key)
+The repository is in an early foundation stage. The app shell, Supabase helpers, and auth/session middleware are in place, while the actual scan orchestration and persistence flow are still to be implemented.
 
 ## Getting Started
 
-1. Install dependencies:
+### Prerequisites
+
+- Node.js 20+
+- npm 10+
+- A Supabase project with a URL and anon key
+
+### Install
 
 ```bash
 npm install
 ```
 
-2. Create an environment file:
+### Configure environment
 
-```bash
-cp .env.example .env.local
-```
-
-If `.env.example` does not exist yet, create `.env.local` manually with the variables listed below.
-
-3. Start development server:
-
-```bash
-npm run dev
-```
-
-4. Open:
-
-```text
-http://localhost:3000
-```
-
-## Environment Variables
-
-Add these values to `.env.local`:
+Create a local environment file and add your Supabase values. This repository does not include an `.env.example` file yet, so create `.env.local` manually.
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
+### Run locally
+
+```bash
+npm run dev
+```
+
+Then open `http://localhost:3000`.
+
 ## Scripts
 
-- `npm run dev` - start local development server
-- `npm run build` - create production build
-- `npm run start` - run production server
-- `npm run lint` - run ESLint
+- `npm run dev` starts the development server
+- `npm run build` creates a production build
+- `npm run start` runs the production server
+- `npm run lint` runs ESLint
 
 ## Project Structure
 
 ```text
-app/                # Next.js app router pages and layouts
-components/         # Reusable UI components
-lib/supabase/       # Supabase server/browser client helpers
-lib/scanner/        # Playwright-based scanner logic (to be implemented)
-public/             # Static assets
-middelware.ts       # Request middleware (Supabase auth/session handling)
+app/             Next.js routes, layouts, and global styles
+components/      Shared UI components
+lib/scanner/     Scanner-related code and browser automation helpers
+lib/supabase/    Supabase client helpers for server and client usage
+public/          Static assets
+middelware.ts    Request middleware for Supabase session refresh
 ```
 
 ## Architecture Notes
 
 - Use `@/*` absolute imports for internal modules.
-- Prefer Server Components by default; use client components only when interactivity is required.
-- Keep UI in `components`, routing in `app`, and business logic in `lib`.
-- Use `@supabase/ssr` clients from `lib/supabase/client.ts` and `lib/supabase/server.ts`.
+- Prefer Server Components by default and use client components only when interactivity is required.
+- Keep routing in `app`, reusable UI in `components`, and business logic in `lib`.
+- Use the Supabase clients from `lib/supabase/client.ts` and `lib/supabase/server.ts`.
+- Keep scanner-specific code isolated under `lib/scanner`.
 
-## Roadmap (Suggested)
+## Next Steps
 
-1. Implement first scanner workflow in `lib/scanner` using Playwright.
-2. Add scan persistence schema and writes to Supabase.
-3. Create dashboard pages for scan history and issue details.
-4. Add authentication flows and protected routes.
-5. Add CI checks for lint/build.
-
-## License
-
-No license file is defined yet. Add a `LICENSE` file before public distribution.
+1. Build the first Playwright-based scan workflow.
+2. Add persistence for scan results and violations in Supabase.
+3. Create dashboard pages for domains, scans, and findings.
+4. Add authentication flows and route protection.
+5. Add CI checks for linting and builds.
